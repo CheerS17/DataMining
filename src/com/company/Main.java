@@ -239,6 +239,17 @@ public class Main {
         googleplusCrawler.setWebsite("https://plus.google.com/");
         googleplusCrawler.setMain(main);
 
+
+        /**
+         * please run one thread one time
+         */
+        Thread fbThread = new Thread(fbCrawler);
+        fbThread.start();
+//        Thread linkedinThread = new Thread(linkedinCrawler);
+//        linkedinThread.start();
+//        Thread googleplusThread = new Thread(googleplusCrawler);
+//        googleplusThread.start();
+        
 //        System.out.println(System.currentTimeMillis() - time1);
 
     }
