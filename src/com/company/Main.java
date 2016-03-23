@@ -213,9 +213,9 @@ public class Main {
         /**
          * please change the file path here
          */
-        String pathFb = "/Users/majunqi0102/Documents/DataMining/Data/fb.txt";
-        String pathLinkedIn = "/Users/majunqi0102/Documents/DataMining/Data/linkedin.txt";
-        String pathGooglePlus = "/Users/majunqi0102/Documents/DataMining/Data/googleplus.txt";
+        String pathFb = "Data/fb.txt";
+        String pathLinkedIn = "Data/linkedin.txt";
+        String pathGooglePlus = "Data/googleplus.txt";
 
         FileHelper fbFileHelper = new FileHelper();
         FileHelper linkedinFileHelper = new FileHelper();
@@ -249,7 +249,7 @@ public class Main {
 //        linkedinThread.start();
 //        Thread googleplusThread = new Thread(googleplusCrawler);
 //        googleplusThread.start();
-        
+
 //        System.out.println(System.currentTimeMillis() - time1);
 
     }
