@@ -1,5 +1,8 @@
 package com.company;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -39,30 +42,64 @@ public class CrawlRunnable implements Runnable {
     @Override
     public void run() {
         String url;
-        int i = 1;
-        int j = 1;
+        int i = 201;
+        int j = 201;
         System.out.println(getWebsite());
         Iterator it = urls.iterator();
-        while (it.hasNext()) {
-            if ((url = it.next().toString()).contains(website)) {
-                System.out.println(i);
-                System.out.println(j++);
-                if (website.contains(fb)) {
-                    main.fbCrawler(url);
-                } else if (website.contains(linkedin)) {
-                    main.linkedinCrawler(url);
-                } else if (website.contains(googleplus)) {
-                    main.googlePlusCrawler(url);
+        try {
+//            FileWriter fw1 = new FileWriter("out/facebook.txt");
+//            FileWriter fw1 = new FileWriter("out/facebook101.txt");
+            FileWriter fw1 = new FileWriter("out/facebook201.txt");
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+//            FileWriter fw2 = new FileWriter("out/linkedin.txt");
+//            FileWriter fw2 = new FileWriter("out/linkedin101.txt");
+            FileWriter fw2 = new FileWriter("out/linkedin201.txt");
+            BufferedWriter bw2 = new BufferedWriter(fw2);
+//            FileWriter fw3 = new FileWriter("out/googleplus.txt");
+//            FileWriter fw3 = new FileWriter("out/googleplus101.txt");
+            FileWriter fw3 = new FileWriter("out/googleplus201.txt");
+            BufferedWriter bw3 = new BufferedWriter(fw3);
+
+            while (it.hasNext()) {
+                if ((url = it.next().toString()).contains(website)) {
+                    System.out.println(i);
+                    System.out.println(j++);
+                    if (website.contains(fb)) {
+//                        if (i == 204) {
+                            bw1.write(i + "\t");
+                            main.fbCrawler(url, bw1);
+                            bw1.newLine();
+//                        }
+                    } else if (website.contains(linkedin)) {
+//                        if (i > 287) {
+                            bw2.write(i + "\t");
+                            main.linkedinCrawler(url, bw2);
+                            bw2.newLine();
+//                        }
+                    } else if (website.contains(googleplus)) {
+//                        if (i == 284) {
+                            bw3.write(i + "\t");
+                            main.googlePlusCrawler(url, bw3);
+                            bw3.newLine();
+//                        }
+                    }
+                    System.out.println();
+                    Thread.sleep(1000);
                 }
-                System.out.println("\n" + main.findUsername(url));
-                System.out.println();
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                i++;
             }
-            i++;
+            bw1.close();
+            fw1.close();
+            bw2.close();
+            fw2.close();
+            bw3.close();
+            fw3.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+
         }
     }
 }

@@ -3,7 +3,10 @@ package com.company;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +15,19 @@ import java.util.List;
  */
 public class Main {
 
-    public static void fbCrawler(String url) {
+    public static void fbCrawler(String url, BufferedWriter bw) {
         String pageCode = null;
         String tempString = null;
 
         String currentAddress = null;
         String education = null;
         String name = null;
+
+        String fileString = null;
+
+        String geoPosition = null;
+        String latitude = null;
+        String longitude = null;
 
         int indexBegin = 0;
         int indexStop = 0;
@@ -28,15 +37,25 @@ public class Main {
 //            System.out.println(System.currentTimeMillis() - time2);
             pageCode = doc.html().replaceAll("\\s", "");
 //            System.out.println(pageCode);
+
+
+            //find username
+            System.out.println("\n" + findUsername(url));
+            bw.write(findUsername(url) + "\t");
+
             //find name
             tempString = pageCode;
             name = tempString.substring(tempString.indexOf("<titleid=\"pageTitle\">") + "<titleid=\"pageTitle\">".length(), tempString.indexOf("</title>"));
             if (name.contains("|Facebook")) {
-                System.out.println(name.substring(0, name.indexOf("|Facebook")));
+                name = name.substring(0, name.indexOf("|Facebook"));
+                System.out.println(name);
+                bw.write(name + "\t");
             } else {
                 System.out.println(name);
+                bw.write(name + "\t");
             }
             tempString = pageCode;
+
             //find current city
             if (tempString.contains("<divclass=\"fsmfwnfcg\">Currentcity</div>")) {
                 indexStop = tempString.indexOf("<divclass=\"fsmfwnfcg\">Currentcity</div>") - 11;
@@ -48,10 +67,41 @@ public class Main {
                         break;
                     }
                 }
+
                 //print current city
-                System.out.println(currentAddress.substring(indexBegin));
-            } else {
-                System.out.println("No CurrentCity");
+                currentAddress = currentAddress.substring(indexBegin);
+                System.out.println(currentAddress);
+                geoPosition = getGeoGet(currentAddress);
+                latitude = geoPosition;
+                latitude = latitude.substring(latitude.indexOf(":") + 1, latitude.indexOf(","));
+                longitude = geoPosition.substring(geoPosition.indexOf(",") + 1);
+                longitude = longitude.substring(longitude.indexOf(":") + 1);
+                bw.write(latitude + "\t" + longitude + "\t");
+
+                //the location is in the annotation
+            } else if (tempString.contains("<divclass=\"fsmfwnfcg\">Currentcity<a")){
+                indexStop = tempString.indexOf("<divclass=\"fsmfwnfcg\">Currentcity<a") - 11;
+                indexBegin = indexStop - 50;
+                currentAddress = tempString.substring(indexBegin, indexStop);
+                for (int i = currentAddress.length() - 1; i > 0; i--) {
+                    if (currentAddress.charAt(i) == '>') {
+                        indexBegin = i + 1;
+                        break;
+                    }
+                }
+
+                //print current city
+                currentAddress = currentAddress.substring(indexBegin);
+                System.out.println(currentAddress);
+                geoPosition = getGeoGet(currentAddress);
+                latitude = geoPosition;
+                latitude = latitude.substring(latitude.indexOf(":") + 1, latitude.indexOf(","));
+                longitude = geoPosition.substring(geoPosition.indexOf(",") + 1);
+                longitude = longitude.substring(longitude.indexOf(":") + 1);
+                bw.write(latitude + "\t" + longitude + "\t");
+            }else {
+                System.out.println("NoCurrentCity");
+                bw.write("NoCurrentCity" + "\t" + "NoCurrentCity" + "\t");
             }
 
             //find education
@@ -61,7 +111,14 @@ public class Main {
                 tempString = tempString.substring(tempString.indexOf("<ahref") + "<ahref".length());
                 indexStop = tempString.indexOf("</a>");
                 indexBegin = indexStop - 50;
-                education = tempString.substring(indexBegin, indexStop);
+                //if the buffer is 50 may be too large
+                if (indexBegin > 0) {
+                    education = tempString.substring(indexBegin, indexStop);
+                } else {
+                    //if too large, set it smaller
+                    indexBegin = indexStop - 30;
+                    education = tempString.substring(indexBegin, indexStop);
+                }
                 for (int i = education.length() - 1; i > 0; i--) {
                     if (education.charAt(i) == '>') {
                         indexBegin = i + 1;
@@ -69,9 +126,12 @@ public class Main {
                     }
                 }
                 //print education
-                System.out.println(education.substring(indexBegin));
+                education = education.substring(indexBegin);
+                System.out.println(education);
+                bw.write(education);
             } else {
-                System.out.println("No Education");
+                System.out.println("NoEducation");
+                bw.write("NoEducation");
             }
 
         } catch (IOException e) {
@@ -79,7 +139,7 @@ public class Main {
         }
     }
 
-    public static void linkedinCrawler(String url) {
+    public static void linkedinCrawler(String url, BufferedWriter bw) {
         String pageCode = null;
 
         String currentAddress = null;
@@ -87,15 +147,26 @@ public class Main {
         String name = null;
 
         String tempString;
+
+        String geoPosition = null;
+        String latitude = null;
+        String longitude = null;
+
         try {
 //            long time2 = System.currentTimeMillis();
             Document doc = Jsoup.connect(url).get();
 //            System.out.println(System.currentTimeMillis() - time2);
             pageCode = doc.html().replaceAll("\\s", "");
+
+            //find username
+            System.out.println("\n" + findUsername(url));
+            bw.write(findUsername(url) + "\t");
+
             //find name
             tempString = pageCode;
             name = tempString.substring(tempString.indexOf("<title>") + "<title>".length(), tempString.indexOf("|LinkedIn") - 1);
             System.out.println(name);
+            bw.write(name + "\t");
 
             tempString = pageCode;
             //find current city
@@ -104,8 +175,15 @@ public class Main {
                 currentAddress = tempString.substring("<spanclass=\"locality\">".length(), tempString.indexOf("</span>"));
                 //print current city
                 System.out.println(currentAddress);
+                geoPosition = getGeoGet(currentAddress);
+                latitude = geoPosition;
+                latitude = latitude.substring(latitude.indexOf(":") + 1, latitude.indexOf(","));
+                longitude = geoPosition.substring(geoPosition.indexOf(",") + 1);
+                longitude = longitude.substring(longitude.indexOf(":") + 1);
+                bw.write(latitude + "\t" + longitude + "\t");
             } else {
-                System.out.println("No CurrentCity");
+                System.out.println("NoCurrentCity");
+                bw.write("NoCurrentCity" + "\t" + "NoCurrentCity" + "\t");
             }
 
             //find education
@@ -115,8 +193,10 @@ public class Main {
                 education = tempString.substring(tempString.indexOf(">") + 1, tempString.indexOf("</a>"));
                 //print education
                 System.out.println(education);
+                bw.write(education);
             } else {
-                System.out.println("No Education");
+                System.out.println("NoEducation");
+                bw.write("NoEducation");
             }
 
         } catch (IOException e) {
@@ -124,12 +204,16 @@ public class Main {
         }
     }
 
-    public static void googlePlusCrawler(String url) {
+    public static void googlePlusCrawler(String url, BufferedWriter bw) {
         String pageCode = null;
 
         String currentAddress = null;
         String education = null;
         String name = null;
+
+        String geoPosition = null;
+        String latitude = null;
+        String longitude = null;
 
         String tempString;
         try {
@@ -137,11 +221,17 @@ public class Main {
             Document doc = Jsoup.connect(url).get();
 //            System.out.println(System.currentTimeMillis() - time2);
             pageCode = doc.html().replaceAll("\\s", "");
+
+            //find username
+            System.out.println("\n" + findUsername(url));
+            bw.write(findUsername(url) + "\t");
+
             //find name
             tempString = pageCode;
             name = tempString.substring(tempString.indexOf("<titleitemprop=\"name\">") + "<titleitemprop=\"name\">".length());
             name = name.substring(0, name.indexOf("-About"));
             System.out.println(name);
+            bw.write(name + "\t");
 
             tempString = pageCode;
             //find current city
@@ -150,8 +240,15 @@ public class Main {
                 currentAddress = tempString.substring(0, tempString.indexOf("</div>"));
                 //print current city
                 System.out.println(currentAddress);
+                geoPosition = getGeoGet(currentAddress);
+                latitude = geoPosition;
+                latitude = latitude.substring(latitude.indexOf(":") + 1, latitude.indexOf(","));
+                longitude = geoPosition.substring(geoPosition.indexOf(",") + 1);
+                longitude = longitude.substring(longitude.indexOf(":") + 1);
+                bw.write(latitude + "\t" + longitude + "\t");
             } else {
-                System.out.println("No CurrentCity");
+                System.out.println("NoCurrentCity");
+                bw.write("NoCurrentCity" + "\t" + "NoCurrentCity" + "\t");
             }
 
             //find education
@@ -162,8 +259,10 @@ public class Main {
                 education = education.substring(0, education.indexOf("</div>"));
                 //print education
                 System.out.println(education);
+                bw.write(education);
             } else {
-                System.out.println("No Education");
+                System.out.println("NoEducation");
+                bw.write("NoEducation");
             }
 
         } catch (IOException e) {
@@ -176,7 +275,7 @@ public class Main {
         String username = null;
         if (url.contains("https://www.facebook.com/")) {
             if (url.contains("id=")) {
-                username = url.substring(url.indexOf("id=")+3, url.indexOf("&"));
+                username = url.substring(url.indexOf("id=") + 3, url.indexOf("&"));
             } else {
                 username = url.substring("https://www.facebook.com/".length());
                 username = username.substring(0, username.indexOf("/"));
@@ -203,6 +302,32 @@ public class Main {
         } else return null;
     }
 
+    public static String getGeoGet(String city) {
+        String tempURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyDGkuRyh5SXgaU-JY3WobKrCx_DOVVAUIU";
+        HttpURLConnection httpURLConnection = null;
+        String json;
+        try {
+            URL url = new URL(tempURL);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = br.readLine()) != null) {
+                response.append(inputLine);
+            }
+            br.close();
+            json = response.toString().replaceAll("\\s", "");
+            json = json.substring(json.indexOf("{\"lat\"") + 1);
+            json = json.substring(0, json.indexOf("}"));
+            return json;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         Main main = new Main();
 //        long time1 = System.currentTimeMillis();
@@ -213,9 +338,20 @@ public class Main {
         /**
          * please change the file path here
          */
-        String pathFb = "Data/fb.txt";
-        String pathLinkedIn = "Data/linkedin.txt";
-        String pathGooglePlus = "Data/googleplus.txt";
+        //1-100
+//        String pathFb = "Data/facebook.txt";
+//        String pathLinkedIn = "Data/linkedin.txt";
+//        String pathGooglePlus = "Data/googleplus.txt";
+
+        //101-200
+//        String pathFb = "Data/facebook101.txt";
+//        String pathLinkedIn = "Data/linkedin101.txt";
+//        String pathGooglePlus = "Data/googleplus101.txt";
+
+        //201-300
+        String pathFb = "Data/facebook201.txt";
+        String pathLinkedIn = "Data/linkedin201.txt";
+        String pathGooglePlus = "Data/googleplus201.txt";
 
         FileHelper fbFileHelper = new FileHelper();
         FileHelper linkedinFileHelper = new FileHelper();
@@ -243,8 +379,9 @@ public class Main {
         /**
          * please run one thread one time
          */
-        Thread fbThread = new Thread(fbCrawler);
-        fbThread.start();
+
+//        Thread fbThread = new Thread(fbCrawler);
+//        fbThread.start();
 //        Thread linkedinThread = new Thread(linkedinCrawler);
 //        linkedinThread.start();
 //        Thread googleplusThread = new Thread(googleplusCrawler);
@@ -252,6 +389,74 @@ public class Main {
 
 //        System.out.println(System.currentTimeMillis() - time1);
 
+//        FileAddSequence();
+//        FileAddLinkedInSequence();
+
+    }
+
+    public static void FileAddLinkedInSequence() {
+        String str = null;
+        String str2 = null;
+        int num = 1;
+        try {
+
+//            FileWriter fw1 = new FileWriter("out/linkedin1.txt");
+//            FileWriter fw1 = new FileWriter("out/googleplus1.txt");
+            FileWriter fw1 = new FileWriter("out/facebook1.txt");
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+//            FileReader fr1 = new FileReader("Data/linkedin.txt");
+//            FileReader fr1 = new FileReader("Data/googleplus.txt");
+            FileReader fr1 = new FileReader("Data/facebook.txt");
+            BufferedReader br1 = new BufferedReader(fr1);
+//            FileReader fr2 = new FileReader("out/linkedin.txt");
+//            FileReader fr2 = new FileReader("out/googleplus.txt");
+            FileReader fr2 = new FileReader("out/facebook.txt");
+            BufferedReader br2 = new BufferedReader(fr2);
+            while ((str = br1.readLine()) != null) {
+                if (str.contains("http")) {
+                    str2 = br2.readLine();
+                    str2 = num + "\t" + str2;
+                    bw1.write(str2);
+                    bw1.newLine();
+                }
+                num++;
+            }
+            bw1.close();
+            fw1.close();
+            br2.close();
+            fr2.close();
+            br1.close();
+            fr1.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void FileAddSequence() {
+        String str = null;
+        int num = 1;
+        try {
+
+            FileWriter fw1 = new FileWriter("out/linkedin1.txt");
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+            FileReader fr1 = new FileReader("out/linkedin.txt");
+            BufferedReader br1 = new BufferedReader(fr1);
+            while ((str = br1.readLine()) != null) {
+                str = num + "\t" + str;
+                bw1.write(str);
+                bw1.newLine();
+                num++;
+            }
+            bw1.close();
+            fw1.close();
+            br1.close();
+            fr1.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

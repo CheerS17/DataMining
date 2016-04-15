@@ -1,0 +1,99 @@
+201	alexanderlik	AlexAnderli	46.950046	-113.909851	NoEducation
+202	alexasomba	AlexanderAsomb	13.8856449	14.677982	NoEducation
+203	alexanderbecker	AlexanderBecke	[]	"ZERO_RESULTS"	NoEducation
+204	geilt	AlexanderConro	33.67192	-117.78349	NoEducation
+206	alexkess	AlexanderKesselaa	-33.4245981	151.3426361	NoEducation
+208	ariagmitter	AriaGmitter[LION	27.3743811	-80.2443229	NoEducation
+209	aubreybierwirth	AubreyBierwirt	[]	"ZERO_RESULTS"	TheUniversityofGlasgow
+210	aubreyellenshomo	AubreyShom	36.2153239	-79.65986599999999	St.John'sCollege(NM)
+211	aubrey-hanford-a6957a65	AubreyHanfor	40.3560789	-76.39155199999999	UniversityofMassachusetts,Amherst
+212	aubreyhollander	AubreyHollande	51.18383	-113.8769511	PretoriaTechnicalCollege
+214	aubreyterriere	AubreyTerrier	[]	"ZERO_RESULTS"	UniversityofNorthernColorado
+215	bill-madison-80bb1232	BillMadiso	26.5323993	-81.7664899	NoEducation
+216	brentpeterson	BrentPeterson,PMP,MS,MB	37.480525	-77.445829	UniversityofVirginia
+217	carterbyrnes	CarterByrne	[]	"ZERO_RESULTS"	UniversityofPennsylvania
+218	cartercole	CarterCol	30.0852522	-95.0903938	TexasA&amp;MUniversity
+219	cartergibson	CarterGibso	37.9297707	-122.3279149	AmericanUniversity-KogodSchoolofBusiness
+222	cartermason	CarterMaso	[]	"ZERO_RESULTS"	AzusaPacificUniversity
+223	cartertorrey	CarterTorrey(5,000+	53.5059628	-2.6348072	ManhattanCollege
+224	chloecairncross	ChloeCairncros	50.8735837	-0.03626	NoEducation
+225	chloeforbeskindlen	ChloëForbes-Kindle	56.4243391	-3.3914109	UHIMillenniumInstitute
+226	chloefoster	ChloeL	21.4012299	-157.6485225	CentralMissouriStateUniversity
+227	chloegray	ChloeMasonGra	33.8876179	-84.289389	NewYorkUniversity
+228	chloepeltier	ChloéPeltie	[]	"ZERO_RESULTS"	INSEEC
+229	chloerain	ChloëRai	38.489258	-78.82425289999999	NoEducation
+231	danielbru	DanielBrusilovsk	38.8642448	-121.208178	NoEducation
+232	dburka	DanielBurk	38.8642448	-121.208178	NoEducation
+233	danielcheong	DanielCheon	26.0696541	56.3815785	NoEducation
+235	dlemire	DanielLemir	48.42382	-123.3761293	UniversitédeMontréal-ÉcolePolytechniquedeMontréal
+236	danielrankin	DanielRanki	35.1306949	-82.5363098	EastCarolinaUniversity
+238	danielwaisberg	DanielWaisber	52.237855	0.1919273	TelAvivUniversity
+239	davidjameswalsh	DavidWals	43.0795919	-89.38478069999999	LakelandCollege
+240	evelyn330	Chia-Yu(Evelyn)Chan	26.3836884	123.4934282	CarnegieMellonUniversity
+241	evelynfred	EvelynFre	42.257732	-88.2081762	NorthwesternUniversity
+244	evelynmccormack	EvelynMcCormac	[]	"ZERO_RESULTS"	ManhattanvilleCollege
+245	evelynparham	EvelynParha	33.054874	-84.6993449	NoEducation
+246	evelynsherbenou	EvelynSherbeno	[]	"ZERO_RESULTS"	UniversityofMichigan
+247	esfortuna	EvelynFortun	15.2107219	122.7915891	NoEducation
+248	henrypichat	HenryPicha	[]	"ZERO_RESULTS"	NoEducation
+249	hposner	HenryPosne	[]	"ZERO_RESULTS"	WashingtonUniversityinSt.Louis
+251	henrysullivan	HenrySulliva	42.257732	-88.2081762	UniversityofIllinoisatChicago
+252	jackcrawford	JackCCrawfor	38.8642448	-121.208178	ClaremontGraduateUniversity
+255	jackherrick	JackHerric	38.8642448	-121.208178	DartmouthCollege
+256	jackhmwong	JackHMWon	1.4707592	104.0884808	NationalUniversityofSingapore
+257	jacklail	JackLai	35.9524749	-83.8512781	EastCarolinaUniversity
+258	cavalius	JackOttoKristense	[]	"ZERO_RESULTS"	CopenhagenBusinessSchool
+259	jacksarlo	JackSarl	36.082227	14.5765028	NoEducation
+260	jaschofield	JackSchofiel	51.3882532	-0.1694085	TheUniversityofBritishColumbia
+262	janetdriscollmiller	JanetDriscollMille	38.070591	-78.44631099999999	JamesMadisonUniversity
+263	jonathanrosenberggoogle	JonathanRosenber	71.3867745	-66.9502861	UniversityofChicago
+265	LukeRB	LukeBornheime	37.9297707	-122.3279149	BryantUniversity
+267	lukebrady	LukeBrad	39.356662	-94.38552199999999	MercerUniversity
+269	lukemckend	LukeMcken	-26.1041199	28.1376001	NoEducation
+270	attorneylukerioux	LukeRiou	43.727658	-70.087632	UniversityofMaineSchoolofLaw
+271	lukethelibrarian	LukeRosenberge	29.4193359	-98.47802109999999	TheUniversityofTexasatAustin
+273	maddiegrant	MaddieGrant,CA	38.995548	-76.90939299999999	NoEducation
+274	madsphotography	MadisonDevli	37.0466521	-86.30671889999999	NossiCollegeofArt
+275	mrartifex	MadisonHillhous	27.263362	-72.71206859999999	NoEducation
+276	willenslaw	MattWillen	42.257732	-88.2081762	LoyolaUniversityChicagoSchoolofLaw
+277	matthewcaluori	MatthewCaluor	45.1100659	-123.3771801	NoEducation
+279	matthewhuntme	MatthewHunt,PredictableGrowthExper	43.8554579	-79.11689699999999	NoEducation
+280	matthewlevine	MatthewLevin	38.8642448	-121.208178	DartmouthCollege
+281	mattmaber	MatthewMabe	50.8593091	-1.0206408	NoEducation
+282	matthewmarley	MatthewMarle	55.8823221	-3.99122	NoEducation
+283	matthewperosi	MatthewPeros	[]	"ZERO_RESULTS"	NoEducation
+284	matthewrappaport	MatthewRappapor	[]	"ZERO_RESULTS"	SUNYatBuffalo
+285	mwstephenson	MatthewStephenso	39.1257771	-84.58698889999999	UniversityofKentucky
+286	mstepka	MatthewStepk	38.8642448	-121.208178	UNIVERSITYOFCALIFORNIA,LOSANGELES,SCHOOLOFLAW
+287	matthewsutherland	MatthewSutherlan	39.9656952	-82.96993599999999	GrandRapidsCommunityCollege
+290	
+292	
+293	
+294	mikeriffle	MichaelRiffl	[]	"ZERO_RESULTS"	UniversityofWashington
+297	nathanchase	NathanChas	28.425851	-81.43477299999999	StetsonUniversity
+298	nmfong	NathanFon	40.1379919	-74.9557629	NoEducation
+299	njohns	NathanJohn	38.8642448	-121.208178	CaliforniaPolytechnicStateUniversity-SanLuisObispo
+300	nathan	NathanSmit	33.0237921	-96.4637379	NoEducation
+301	
+302	
+303	
+304	
+305	
+307	
+308	
+309	
+310	
+311	
+312	
+313	
+315	
+316	
+317	
+318	
+319	
+320	
+321	
+322	
+323	
+324	
+325	
