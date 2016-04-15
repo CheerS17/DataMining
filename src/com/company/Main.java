@@ -79,7 +79,7 @@ public class Main {
                 bw.write(latitude + "\t" + longitude + "\t");
 
                 //the location is in the annotation
-            } else if (tempString.contains("<divclass=\"fsmfwnfcg\">Currentcity<a")){
+            } else if (tempString.contains("<divclass=\"fsmfwnfcg\">Currentcity<a")) {
                 indexStop = tempString.indexOf("<divclass=\"fsmfwnfcg\">Currentcity<a") - 11;
                 indexBegin = indexStop - 50;
                 currentAddress = tempString.substring(indexBegin, indexStop);
@@ -99,7 +99,7 @@ public class Main {
                 longitude = geoPosition.substring(geoPosition.indexOf(",") + 1);
                 longitude = longitude.substring(longitude.indexOf(":") + 1);
                 bw.write(latitude + "\t" + longitude + "\t");
-            }else {
+            } else {
                 System.out.println("NoCurrentCity");
                 bw.write("NoCurrentCity" + "\t" + "NoCurrentCity" + "\t");
             }
@@ -303,6 +303,19 @@ public class Main {
     }
 
     public static String getGeoGet(String city) {
+        String temp = null;
+        if (city.contains(",")) {
+            temp = city.substring(city.indexOf(","));
+        }
+        if (city.contains("Greater")) {
+            city = city.substring(city.indexOf("Greater") + "Greater".length());
+        }
+        if (city.contains("Area")) {
+            city = city.substring(0, city.indexOf("Area"));
+        }
+        if (temp != null) {
+            city = city + temp;
+        }
         String tempURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyDGkuRyh5SXgaU-JY3WobKrCx_DOVVAUIU";
         HttpURLConnection httpURLConnection = null;
         String json;
@@ -382,8 +395,8 @@ public class Main {
 
 //        Thread fbThread = new Thread(fbCrawler);
 //        fbThread.start();
-//        Thread linkedinThread = new Thread(linkedinCrawler);
-//        linkedinThread.start();
+        Thread linkedinThread = new Thread(linkedinCrawler);
+        linkedinThread.start();
 //        Thread googleplusThread = new Thread(googleplusCrawler);
 //        googleplusThread.start();
 

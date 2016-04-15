@@ -71,11 +71,11 @@ public class CrawlRunnable implements Runnable {
                             bw1.newLine();
 //                        }
                     } else if (website.contains(linkedin)) {
-//                        if (i > 287) {
+                        if (i == 311) {
                             bw2.write(i + "\t");
                             main.linkedinCrawler(url, bw2);
                             bw2.newLine();
-//                        }
+                        }
                     } else if (website.contains(googleplus)) {
 //                        if (i == 284) {
                             bw3.write(i + "\t");
@@ -84,7 +84,7 @@ public class CrawlRunnable implements Runnable {
 //                        }
                     }
                     System.out.println();
-                    Thread.sleep(1000);
+//                    Thread.sleep(1000);
                 }
                 i++;
             }
